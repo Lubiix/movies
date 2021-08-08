@@ -42,13 +42,15 @@ function App() {
     }
     console.log('image film',image)
     console.log('name', name)
-    setMoviesWishList([...moviesWishList, name]) 
+    setMoviesWishList([...moviesWishList, {name:name, image:image}]) 
     console.log(moviesWishList)
   }
 
   let whishList = [];
   for (let index = 0; index < moviesWishList.length; index++){
-      whishList.push(<ListGroupItem>{moviesWishList[index]}</ListGroupItem>)
+      whishList.push(<ListGroupItem>
+        <img width="25%" src={moviesWishList[index].image}></img>{moviesWishList[index].name} 
+      </ListGroupItem>)
   }
 
   const handleClickDeleteMovie = (deletedMovie) => {
@@ -69,28 +71,28 @@ function App() {
   return (
     <div style={{backgroundColor:"#232528"}}>
       <Container>
-        <Nav>
-          <span className="navbar-brand">
-            <img src="./logo.png" width="30" height="30" className="d-inline-block align-top" alt="logo" />
-          </span>
-          <NavItem>
-            <NavLink style={{color:'white'}}>Last Releases</NavLink>
-          </NavItem>
-          <Button id="Popover1" type="button">
-            {moviesCount} Film
-          </Button>
-          <Popover placement="bottom" isOpen={popoverOpen} target="Popover1" toggle={toggle}>
-            <PopoverHeader>Wish List</PopoverHeader>
-            <PopoverBody>
-              <ListGroup>
-                {whishList} 
-              </ListGroup>
-            </PopoverBody>
-          </Popover>
-        </Nav>
-        <Row>
-          {movieList} 
-        </Row>
+          <Nav>
+              <span className="navbar-brand">
+                <img src="./logo.png" width="30" height="30" className="d-inline-block align-top" alt="logo" />
+              </span>
+              <NavItem>
+                <NavLink style={{color:'white'}}>Last Releases</NavLink>
+              </NavItem>
+              <Button id="Popover1" type="button">
+                {moviesCount} Film
+              </Button>
+              <Popover placement="bottom" isOpen={popoverOpen} target="Popover1" toggle={toggle}>
+                <PopoverHeader>Wish List</PopoverHeader>
+                <PopoverBody>
+                  <ListGroup>
+                    {whishList} 
+                  </ListGroup>
+                </PopoverBody>
+              </Popover>
+          </Nav>
+          <Row>
+            {movieList} 
+          </Row>
       </Container>
     </div>
   );
